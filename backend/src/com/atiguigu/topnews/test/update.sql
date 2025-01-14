@@ -1,0 +1,1 @@
+UPDATE `news_headline` SET `create_time` = now(), `update_time` = now();
