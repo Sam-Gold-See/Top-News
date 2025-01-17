@@ -20,6 +20,23 @@ public class NewsUserController extends BaseController {
     private final NewsUserService newsUserService = new NewsUserServiceImpl();
 
     /**
+     * 注册时检验用户名是否被占用的业务接口实现
+     *
+     * @param req  HttpServletRequest对象，包含客户端的请求信息。
+     * @param resp HttpServletResponse对象，用于向客户端发送响应。
+     */
+    protected void service(HttpServletRequest req, HttpServletResponse resp) {
+        String username = req.getParameter("username");
+        NewsUser newsUser = newsUserService.findByUsername(username);
+        Result result;
+        if (null == newsUser)
+            result = Result.ok(null);
+        else
+            result = Result.build(null, ResultCodeEnum.USERNAME_ERROR);
+        WebUtil.writeJson(resp, result);
+    }
+
+    /**
      * 根据token口令获得用户信息的业务接口实现
      *
      * @param req  HttpServletRequest对象，包含客户端的请求信息。
