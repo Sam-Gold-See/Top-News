@@ -13,5 +13,5 @@ public class NewsUser implements Serializable {
     private Integer uid;
     private String username;
     private String userPwd;
-    private String nickname;
+    private String nickName;
 }

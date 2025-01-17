@@ -20,12 +20,29 @@ public class NewsUserController extends BaseController {
     private final NewsUserService newsUserService = new NewsUserServiceImpl();
 
     /**
+     * 注册功能的业务接口实现
+     *
+     * @param req  HttpServletRequest对象，包含客户端的请求信息。
+     * @param resp HttpServletResponse对象，用于向客户端发送响应。
+     */
+    protected void regist(HttpServletRequest req, HttpServletResponse resp) {
+        NewsUser newsUser = WebUtil.readJson(req, NewsUser.class);
+        NewsUser usedUser = newsUserService.findByUsername(newsUser.getUsername());
+        Result result;
+        if (null == usedUser && newsUserService.registUser(newsUser) != 0)
+            result = Result.ok(null);
+        else
+            result = Result.build(null, ResultCodeEnum.USERNAME_ERROR);
+        WebUtil.writeJson(resp, result);
+    }
+
+    /**
      * 注册时检验用户名是否被占用的业务接口实现
      *
      * @param req  HttpServletRequest对象，包含客户端的请求信息。
      * @param resp HttpServletResponse对象，用于向客户端发送响应。
      */
-    protected void service(HttpServletRequest req, HttpServletResponse resp) {
+    protected void checkUserName(HttpServletRequest req, HttpServletResponse resp) {
         String username = req.getParameter("username");
         NewsUser newsUser = newsUserService.findByUsername(username);
         Result result;

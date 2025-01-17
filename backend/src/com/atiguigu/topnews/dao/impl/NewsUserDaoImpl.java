@@ -10,7 +10,7 @@ public class NewsUserDaoImpl extends BaseDao implements NewsUserDao {
     @Override
     public NewsUser findByUsername(String username) {
         // 准备SQL
-        String sql = "SELECT `uid`, `username`, `user_pwd` AS `userPwd`, `nick_name` AS `nickname` FROM `news_user` WHERE `username` = ?";
+        String sql = "SELECT `uid`, `username`, `user_pwd` AS `userPwd`, `nick_name` AS `nickName` FROM `news_user` WHERE `username` = ?";
         // 调用BaseDAO公共查询方法
         List<NewsUser> newsUserList = baseQuery(NewsUser.class, sql, username);
         // 如果找到，返回集合中的第一个数据
@@ -21,10 +21,16 @@ public class NewsUserDaoImpl extends BaseDao implements NewsUserDao {
 
     @Override
     public NewsUser findByUid(Integer userId) {
-        String sql = "SELECT `uid`, `username`, `user_pwd` AS `userPwd`, `nick_name` AS `nickname` FROM `news_user` WHERE `uid` = ?";
+        String sql = "SELECT `uid`, `username`, `user_pwd` AS `userPwd`, `nick_name` AS `nickName` FROM `news_user` WHERE `uid` = ?";
         List<NewsUser> newsUserList = baseQuery(NewsUser.class, sql, userId);
         if (null != newsUserList && !newsUserList.isEmpty())
             return newsUserList.get(0);
         return null;
+    }
+
+    @Override
+    public int registUser(NewsUser newsUser) {
+        String sql = "INSERT INTO `news_user` VALUES (DEFAULT,?,?,?)";
+        return baseUpdate(sql, newsUser.getUsername(), newsUser.getUserPwd(), newsUser.getNickName());
     }
 }
