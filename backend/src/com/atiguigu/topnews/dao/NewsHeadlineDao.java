@@ -1,5 +1,6 @@
 package com.atiguigu.topnews.dao;
 
+import com.atiguigu.topnews.pojo.HeadLineDetailVo;
 import com.atiguigu.topnews.pojo.HeadLinePageVo;
 import com.atiguigu.topnews.pojo.HeadLineQueryVo;
 
@@ -22,4 +23,19 @@ public interface NewsHeadlineDao {
      * @return 返回满足条件的记录数
      */
     int findPageCount(HeadLineQueryVo headlineQueryVo);
+
+    /**
+     * 增加新闻的信息浏览量
+     *
+     * @param hid 头条id
+     */
+    void increasePageViews(Integer hid);
+
+    /**
+     * 多表查询新闻详情
+     *
+     * @param hid 头条id
+     * @return 新闻详情HeadLineDetailVo对象
+     */
+    HeadLineDetailVo findHeadlineDetail(Integer hid);
 }

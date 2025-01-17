@@ -1,6 +1,7 @@
 package com.atiguigu.topnews.controller;
 
 import com.atiguigu.topnews.common.Result;
+import com.atiguigu.topnews.pojo.HeadLineDetailVo;
 import com.atiguigu.topnews.pojo.HeadLineQueryVo;
 import com.atiguigu.topnews.pojo.NewsType;
 import com.atiguigu.topnews.service.NewsHeadLineService;
@@ -50,5 +51,23 @@ public class PortalController extends BaseController {
         pageInfoMap.put("pageInfo", pageInfo);
         // 响应JSON
         WebUtil.writeJson(resp, Result.ok(pageInfoMap));
+    }
+
+    /**
+     * 查询单个新闻详情
+     *
+     * @param req：HttpServletRequest对象，包含客户端的请求信息。
+     * @param resp：HttpServletResponse对象，用于向客户端发送响应。
+     */
+    protected void showHeadlineDetail(HttpServletRequest req, HttpServletResponse resp) {
+        // 获取要查询的详情新闻id
+        Integer hid = Integer.parseInt(req.getParameter("hid"));
+        // 查询新闻详情
+        HeadLineDetailVo headLineDetailVo = newsHeadlineService.findHeadLineDetail(hid);
+        // 封装data内容
+        Map<String, Object> data = new HashMap<>();
+        data.put("headline", headLineDetailVo);
+        //响应JSON
+        WebUtil.writeJson(resp, Result.ok(data));
     }
 }

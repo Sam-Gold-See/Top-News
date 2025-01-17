@@ -2,6 +2,7 @@ package com.atiguigu.topnews.service.impl;
 
 import com.atiguigu.topnews.dao.NewsHeadlineDao;
 import com.atiguigu.topnews.dao.impl.NewsHeadLineDaoImpl;
+import com.atiguigu.topnews.pojo.HeadLineDetailVo;
 import com.atiguigu.topnews.pojo.HeadLinePageVo;
 import com.atiguigu.topnews.pojo.HeadLineQueryVo;
 import com.atiguigu.topnews.service.NewsHeadLineService;
@@ -33,5 +34,13 @@ public class NewsHeadLineServiceImpl implements NewsHeadLineService {
         pageInfo.put("totalSize", totalSize);
 
         return pageInfo;
+    }
+
+    @Override
+    public HeadLineDetailVo findHeadLineDetail(Integer hid) {
+        // 修改新闻信息浏览量+1
+        newsHeadLineDao.increasePageViews(hid);
+        // 查询新闻详情
+        return newsHeadLineDao.findHeadlineDetail(hid);
     }
 }
