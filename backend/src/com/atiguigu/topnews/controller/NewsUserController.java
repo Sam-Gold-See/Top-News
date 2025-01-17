@@ -20,6 +20,31 @@ public class NewsUserController extends BaseController {
     private final NewsUserService newsUserService = new NewsUserServiceImpl();
 
     /**
+     * 根据token口令获得用户信息的业务接口实现
+     *
+     * @param req  HttpServletRequest对象，包含客户端的请求信息。
+     * @param resp HttpServletResponse对象，用于向客户端发送响应。
+     */
+    protected void getUserInfo(HttpServletRequest req, HttpServletResponse resp) {
+        // 获取请求中的token
+        String token = req.getHeader("token");
+        Result result = Result.build(null, ResultCodeEnum.NOTLOGIN);
+        // 校验token
+        if (null != token && (!token.isEmpty()))
+            if (!JwtUtil.isExpiration(token)) {
+                Integer userId = JwtUtil.getUserId(token).intValue();
+                NewsUser newsUser = newsUserService.findByUid(userId);
+                if (null != newsUser) {
+                    Map<String, Object> data = new HashMap();
+                    newsUser.setUserPwd("");
+                    data.put("user", newsUser);
+                    result = Result.ok(data);
+                }
+            }
+        WebUtil.writeJson(resp, result);
+    }
+
+    /**
      * 登录验证的业务接口实现
      *
      * @param req  HttpServletRequest对象，包含客户端的请求信息。

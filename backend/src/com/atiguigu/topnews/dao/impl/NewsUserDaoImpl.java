@@ -18,4 +18,13 @@ public class NewsUserDaoImpl extends BaseDao implements NewsUserDao {
             return newsUserList.get(0);
         return null;
     }
+
+    @Override
+    public NewsUser findByUid(Integer userId) {
+        String sql = "SELECT `uid`, `username`, `user_pwd` AS `userPwd`, `nick_name` AS `nickname` FROM `news_user` WHERE `uid` = ?";
+        List<NewsUser> newsUserList = baseQuery(NewsUser.class, sql, userId);
+        if (null != newsUserList && !newsUserList.isEmpty())
+            return newsUserList.get(0);
+        return null;
+    }
 }
