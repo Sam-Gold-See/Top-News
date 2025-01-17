@@ -28,6 +28,7 @@ router.beforeEach(async (to, from, next) => {
           next();
         } catch (error) {
           removeToken();
+          next();
         }
       }
     }

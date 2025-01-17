@@ -9,7 +9,7 @@ import java.io.Serializable;
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
-public class HeadlineDetailVo implements Serializable {
+public class HeadLineDetailVo implements Serializable {
     private Integer hid;
     private String title;
     private String article;

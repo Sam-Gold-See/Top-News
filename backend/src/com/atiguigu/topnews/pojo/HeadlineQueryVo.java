@@ -9,7 +9,7 @@ import java.io.Serializable;
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
-public class HeadlineQueryVo implements Serializable {
+public class HeadLineQueryVo implements Serializable {
     private String keyWords;
     private Integer type;
     private Integer pageNum;
