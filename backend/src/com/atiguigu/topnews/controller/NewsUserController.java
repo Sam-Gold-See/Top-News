@@ -86,7 +86,7 @@ public class NewsUserController extends BaseController {
                 if (null != newsUser) {
                     Map<String, Object> data = new HashMap();
                     newsUser.setUserPwd("");
-                    data.put("user", newsUser);
+                    data.put("loginUser", newsUser);
                     result = Result.ok(data);
                 }
             }
