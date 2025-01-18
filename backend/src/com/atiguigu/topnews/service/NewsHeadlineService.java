@@ -30,4 +30,12 @@ public interface NewsHeadLineService {
      * @return 如果成功返回非0的整数，失败返回0
      */
     int addNewsHeadline(NewsHeadLine newsHeadLine);
+
+    /**
+     * 根据新闻id查询单个新闻
+     *
+     * @param hid 新闻id
+     * @return 新闻实体类对象
+     */
+    NewsHeadLine findHeadlineByHid(Integer hid);
 }

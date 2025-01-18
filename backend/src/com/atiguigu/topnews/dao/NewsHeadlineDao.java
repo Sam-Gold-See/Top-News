@@ -47,4 +47,12 @@ public interface NewsHeadlineDao {
      * @return 如果成功返回非0的整数，失败返回0
      */
     int addNewsHeadline(NewsHeadLine newsHeadLine);
+
+    /**
+     * 在数据库中根据新闻id查询新闻
+     *
+     * @param hid 新闻id
+     * @return 返回查询到的新闻
+     */
+    NewsHeadLine findHeadlineByHid(Integer hid);
 }

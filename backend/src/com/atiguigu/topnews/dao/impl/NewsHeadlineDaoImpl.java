@@ -79,4 +79,13 @@ public class NewsHeadLineDaoImpl extends BaseDao implements NewsHeadlineDao {
         String sql = "INSERT INTO `news_headline` VALUES (DEFAULT,?,?,?,?,0,NOW(),NOW(),0)";
         return baseUpdate(sql, newsHeadLine.getTitle(), newsHeadLine.getArticle(), newsHeadLine.getType(), newsHeadLine.getPublisher());
     }
+
+    @Override
+    public NewsHeadLine findHeadlineByHid(Integer hid) {
+        String sql = "SELECT `hid`, `title`, `article`, `type`, `publisher`, `page_views` AS `pageViews` FROM `news_headline` WHERE `hid` = ?";
+        List<NewsHeadLine> newsHeadLineList = baseQuery(NewsHeadLine.class, sql, hid);
+        if (null != newsHeadLineList && !newsHeadLineList.isEmpty())
+            return newsHeadLineList.get(0);
+        return null;
+    }
 }

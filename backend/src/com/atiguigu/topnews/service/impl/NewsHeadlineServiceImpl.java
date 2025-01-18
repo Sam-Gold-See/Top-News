@@ -49,4 +49,9 @@ public class NewsHeadLineServiceImpl implements NewsHeadLineService {
     public int addNewsHeadline(NewsHeadLine newsHeadLine) {
         return newsHeadLineDao.addNewsHeadline(newsHeadLine);
     }
+
+    @Override
+    public NewsHeadLine findHeadlineByHid(Integer hid) {
+        return newsHeadLineDao.findHeadlineByHid(hid);
+    }
 }
