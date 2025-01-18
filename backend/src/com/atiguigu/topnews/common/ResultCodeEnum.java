@@ -12,7 +12,8 @@ public enum ResultCodeEnum {
     USERNAME_ERROR(501, "usernameError"),
     PASSWORD_ERROR(503, "passwordError"),
     NOTLOGIN(504, "notLogin"),
-    USERNAME_USED(505, "userNameUsed");
+    USERNAME_USED(505, "userNameUsed"),
+    UNKNOWN_ERROR(506,"unknownError");
 
     private final Integer code;
     private final String message;
