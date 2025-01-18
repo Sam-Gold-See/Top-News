@@ -1,6 +1,7 @@
 package com.atiguigu.topnews.controller;
 
 import com.atiguigu.topnews.common.Result;
+import com.atiguigu.topnews.common.ResultCodeEnum;
 import com.atiguigu.topnews.pojo.HeadLineDetailVo;
 import com.atiguigu.topnews.pojo.HeadLineQueryVo;
 import com.atiguigu.topnews.pojo.NewsType;
@@ -26,21 +27,24 @@ public class PortalController extends BaseController {
     /**
      * 查询所有头条类型的业务接口实现
      *
-     * @param req：HttpServletRequest对象，包含客户端的请求信息。
-     * @param resp：HttpServletResponse对象，用于向客户端发送响应。
+     * @param req  HttpServletRequest对象，包含客户端的请求信息。
+     * @param resp HttpServletResponse对象，用于向客户端发送响应。
      */
     protected void findAllTypes(HttpServletRequest req, HttpServletResponse resp) {
         // 查询所有的新闻类型，装入Result响应给客户端
         List<NewsType> newsTypeList = typeService.findAll();
         // 将查询结果以列表形式放入JSON串
-        WebUtil.writeJson(resp, Result.ok(newsTypeList));
+        Result result = Result.ok(newsTypeList);
+        if (newsTypeList == null || newsTypeList.isEmpty())
+            result = Result.build(null, ResultCodeEnum.UNKNOWN_ERROR);
+        WebUtil.writeJson(resp, result);
     }
 
     /**
      * 分页带条件查询新闻
      *
-     * @param req：HttpServletRequest对象，包含客户端的请求信息。
-     * @param resp：HttpServletResponse对象，用于向客户端发送响应。
+     * @param req  HttpServletRequest对象，包含客户端的请求信息。
+     * @param resp HttpServletResponse对象，用于向客户端发送响应。
      */
     protected void findNewsPage(HttpServletRequest req, HttpServletResponse resp) {
         HeadLineQueryVo headlineQueryVo = WebUtil.readJson(req, HeadLineQueryVo.class);
@@ -56,8 +60,8 @@ public class PortalController extends BaseController {
     /**
      * 查询单个新闻详情
      *
-     * @param req：HttpServletRequest对象，包含客户端的请求信息。
-     * @param resp：HttpServletResponse对象，用于向客户端发送响应。
+     * @param req  HttpServletRequest对象，包含客户端的请求信息。
+     * @param resp HttpServletResponse对象，用于向客户端发送响应。
      */
     protected void showHeadlineDetail(HttpServletRequest req, HttpServletResponse resp) {
         // 获取要查询的详情新闻id
