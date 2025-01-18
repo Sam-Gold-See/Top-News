@@ -3,6 +3,7 @@ package com.atiguigu.topnews.dao;
 import com.atiguigu.topnews.pojo.HeadLineDetailVo;
 import com.atiguigu.topnews.pojo.HeadLinePageVo;
 import com.atiguigu.topnews.pojo.HeadLineQueryVo;
+import com.atiguigu.topnews.pojo.NewsHeadLine;
 
 import java.util.List;
 
@@ -38,4 +39,12 @@ public interface NewsHeadlineDao {
      * @return 新闻详情HeadLineDetailVo对象
      */
     HeadLineDetailVo findHeadlineDetail(Integer hid);
+
+    /**
+     * 头条存入数据库
+     *
+     * @param newsHeadLine 头条信息
+     * @return 如果成功返回非0的整数，失败返回0
+     */
+    int addNewsHeadline(NewsHeadLine newsHeadLine);
 }

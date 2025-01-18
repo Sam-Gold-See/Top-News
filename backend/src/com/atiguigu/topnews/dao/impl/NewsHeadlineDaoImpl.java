@@ -5,6 +5,7 @@ import com.atiguigu.topnews.dao.NewsHeadlineDao;
 import com.atiguigu.topnews.pojo.HeadLineDetailVo;
 import com.atiguigu.topnews.pojo.HeadLinePageVo;
 import com.atiguigu.topnews.pojo.HeadLineQueryVo;
+import com.atiguigu.topnews.pojo.NewsHeadLine;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -71,5 +72,11 @@ public class NewsHeadLineDaoImpl extends BaseDao implements NewsHeadlineDao {
         if (null != headLineDetailVoList && !headLineDetailVoList.isEmpty())
             return headLineDetailVoList.get(0);
         return null;
+    }
+
+    @Override
+    public int addNewsHeadline(NewsHeadLine newsHeadLine) {
+        String sql = "INSERT INTO `news_headline` VALUES (DEFAULT,?,?,?,?,0,NOW(),NOW(),0)";
+        return baseUpdate(sql, newsHeadLine.getTitle(), newsHeadLine.getArticle(), newsHeadLine.getType(), newsHeadLine.getPublisher());
     }
 }

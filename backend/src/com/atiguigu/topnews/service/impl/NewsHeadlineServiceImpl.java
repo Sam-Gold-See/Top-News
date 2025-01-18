@@ -5,6 +5,7 @@ import com.atiguigu.topnews.dao.impl.NewsHeadLineDaoImpl;
 import com.atiguigu.topnews.pojo.HeadLineDetailVo;
 import com.atiguigu.topnews.pojo.HeadLinePageVo;
 import com.atiguigu.topnews.pojo.HeadLineQueryVo;
+import com.atiguigu.topnews.pojo.NewsHeadLine;
 import com.atiguigu.topnews.service.NewsHeadLineService;
 
 import java.util.HashMap;
@@ -42,5 +43,10 @@ public class NewsHeadLineServiceImpl implements NewsHeadLineService {
         newsHeadLineDao.increasePageViews(hid);
         // 查询新闻详情
         return newsHeadLineDao.findHeadlineDetail(hid);
+    }
+
+    @Override
+    public int addNewsHeadline(NewsHeadLine newsHeadLine) {
+        return newsHeadLineDao.addNewsHeadline(newsHeadLine);
     }
 }
