@@ -20,6 +20,21 @@ public class NewsUserController extends BaseController {
     private final NewsUserService newsUserService = new NewsUserServiceImpl();
 
     /**
+     * 通过token检验用户是否登录
+     *
+     * @param req  HttpServletRequest对象，包含客户端的请求信息。
+     * @param resp HttpServletResponse对象，用于向客户端发送响应。
+     */
+    protected void checkLogin(HttpServletRequest req, HttpServletResponse resp) {
+        String token = req.getHeader("token");
+        Result result = Result.build(null, ResultCodeEnum.NOTLOGIN);
+        if (null != token)
+            if (!JwtUtil.isExpiration(token))
+                result = Result.ok(null);
+        WebUtil.writeJson(resp, result);
+    }
+
+    /**
      * 注册功能的业务接口实现
      *
      * @param req  HttpServletRequest对象，包含客户端的请求信息。
@@ -86,7 +101,6 @@ public class NewsUserController extends BaseController {
      */
     protected void login(HttpServletRequest req, HttpServletResponse resp) {
         NewsUser newsUser = WebUtil.readJson(req, NewsUser.class);
-
         Result result;
         NewsUser loginNewsUser = newsUserService.findByUsername(newsUser.getUsername());
         // 判断用户名
