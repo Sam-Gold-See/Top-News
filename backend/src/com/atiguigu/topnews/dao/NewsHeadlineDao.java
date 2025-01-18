@@ -63,4 +63,12 @@ public interface NewsHeadlineDao {
      * @return 如果成功返回非0的整数，失败返回0
      */
     int updateNewsHeadline(NewsHeadLine newsHeadLine);
+
+    /**
+     * 根据新闻id设置is_completed属性值为1
+     *
+     * @param hid 新闻id
+     * @return 返回影响的行数
+     */
+    int removeByHid(Integer hid);
 }

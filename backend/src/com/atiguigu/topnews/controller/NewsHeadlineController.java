@@ -65,4 +65,18 @@ public class NewsHeadLineController extends BaseController {
             result = Result.build(null, ResultCodeEnum.UNKNOWN_ERROR);
         WebUtil.writeJson(resp, result);
     }
+
+    /**
+     * 删除头条新闻
+     *
+     * @param req  HttpServletRequest对象，包含客户端的请求信息。
+     * @param resp HttpServletResponse对象，用于向客户端发送响应。
+     */
+    protected void removeByHid(HttpServletRequest req, HttpServletResponse resp) {
+        Integer hid = Integer.parseInt(req.getParameter("hid"));
+        Result result = Result.ok(null);
+        if (newsHeadLineService.removeByHid(hid) == 0)
+            result = Result.build(null, ResultCodeEnum.UNKNOWN_ERROR);
+        WebUtil.writeJson(resp, result);
+    }
 }

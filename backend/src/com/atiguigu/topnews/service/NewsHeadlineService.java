@@ -46,4 +46,12 @@ public interface NewsHeadLineService {
      * @return 如果成功返回非0的整数，失败返回0
      */
     int updateNewsHeadline(NewsHeadLine newsHeadLine);
+
+    /**
+     * 根据新闻id删除新闻
+     *
+     * @param hid 新闻id
+     * @return 如果成功返回非0的整数，失败返回0
+     */
+    int removeByHid(Integer hid);
 }
