@@ -55,4 +55,12 @@ public interface NewsHeadlineDao {
      * @return 返回查询到的新闻
      */
     NewsHeadLine findHeadlineByHid(Integer hid);
+
+    /**
+     * 将新的内容存入数据库中相应位置
+     *
+     * @param newsHeadLine 修改后的新闻
+     * @return 如果成功返回非0的整数，失败返回0
+     */
+    int updateNewsHeadline(NewsHeadLine newsHeadLine);
 }

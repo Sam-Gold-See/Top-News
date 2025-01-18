@@ -88,4 +88,10 @@ public class NewsHeadLineDaoImpl extends BaseDao implements NewsHeadlineDao {
             return newsHeadLineList.get(0);
         return null;
     }
+
+    @Override
+    public int updateNewsHeadline(NewsHeadLine newsHeadLine) {
+        String sql = "UPDATE `news_headline` SET `title` = ?, `article` = ?,`type` = ?, `update_time` = NOW() WHERE `hid` = ?";
+        return baseUpdate(sql, newsHeadLine.getTitle(), newsHeadLine.getArticle(), newsHeadLine.getType(), newsHeadLine.getHid());
+    }
 }

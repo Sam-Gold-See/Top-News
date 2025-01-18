@@ -38,4 +38,12 @@ public interface NewsHeadLineService {
      * @return 新闻实体类对象
      */
     NewsHeadLine findHeadlineByHid(Integer hid);
+
+    /**
+     * 更新新闻存储内容
+     *
+     * @param newsHeadLine 头条信息
+     * @return 如果成功返回非0的整数，失败返回0
+     */
+    int updateNewsHeadline(NewsHeadLine newsHeadLine);
 }

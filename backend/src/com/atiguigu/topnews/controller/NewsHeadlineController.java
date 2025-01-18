@@ -51,4 +51,18 @@ public class NewsHeadLineController extends BaseController {
         data.put("headline", newsHeadLine);
         WebUtil.writeJson(resp, Result.ok(data));
     }
+
+    /**
+     * 保存新闻修改
+     *
+     * @param req  HttpServletRequest对象，包含客户端的请求信息。
+     * @param resp HttpServletResponse对象，用于向客户端发送响应。
+     */
+    protected void update(HttpServletRequest req, HttpServletResponse resp) {
+        NewsHeadLine newsHeadLine = WebUtil.readJson(req, NewsHeadLine.class);
+        Result result = Result.ok(null);
+        if (newsHeadLineService.updateNewsHeadline(newsHeadLine) == 0)
+            result = Result.build(null, ResultCodeEnum.UNKNOWN_ERROR);
+        WebUtil.writeJson(resp, result);
+    }
 }
